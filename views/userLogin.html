@@ -1,0 +1,24 @@
+<section ng-controller="UserLogin">
+    <div class="row">
+        <div class="col-md-12" ng-if="loggedIn==false">
+            <div style="color: red;" ng-bind-html="message"></div>
+            <form role="form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" ng-model="cred.user"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" class="form-control" id="password" ng-model="cred.password"/>
+                </div>
+
+                <input type="button" ng-click="login()" value="Login" class="form-control btn-primary"/>
+            </form>
+        </div>
+        <div class="col-md-12" ng-if="loggedIn==true">
+            <h1>yay</h1>
+            <input type="button" ng-click="logout()" value="Logout" class="form-control btn-primary"/>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,58 @@
+<section ng-controller="DNSZoneDelegation">
+    <div class="row">
+        <div class="col-xs-8">
+            <h3>Active delegations</h3>
+            <table class="table table-hover action-table">
+                <tr>
+                    <th>Label</th>
+                    <th>Type</th>
+                    <th>Target</th>
+                    <th>Last modified</th>
+                    <th>Actions</th>
+                </tr>
+                <tr class="action-list hidden">
+                    <td colspan="10">
+                        <h3>Actions</h3>
+                        <ul>
+                            <li><a href="client/{{selected.client}}">View associated</a></li>
+                            <li><a href="client/{{selected.id}}/?download-config">Download config package</a></li>
+                            <li><a href="client/{{selected.id}}/cert/new">Renew certificate</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr ng-repeat="record in combinedRecords" ng-click="showActions($event, record);">
+                    <td>{{ record.name }}</td>
+                    <td><a href="user/{{client.userId}}">{{ record.type }}</a></td>
+                    <td><a href="lease/{{lease.id}}">{{ record.target }}</a></td>
+                    <td>{{ client.lastModified }}</td>
+                    <td><a href="dns/{{ record.zone }}/{{record.id}}">Modify</a></td>
+                </tr>
+            </table>
+            <div class="col-sm-4 action-list">
+                <h3>Actions</h3>
+                <ul>
+                    <li><input type="button" class="btn btn-block" value="Create delegation"
+                               ng-click="addDelegation()"/></li>
+                    <li><input type="button" class="btn btn-danger btn-block" value="Delete"
+                               ng-click="delete()"/></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Create new delegation</h3>
+        <form role="form" class="col-md-8">
+            <div class="form-group">
+                <label for="type">Record type</label>
+                <select ng-model="record.type">
+                    <option>PTR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ip">IP address</label>
+                <input type="text" class="form-control" id="ip" placeholder="Enter the IP address" readonly
+                       ng-model="user.label">
+            </div>
+        </form>
+    </div>
+</section>

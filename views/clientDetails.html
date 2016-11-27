@@ -1,0 +1,72 @@
+<section ng-controller="ClientDetails">
+    <div class="row">
+        <div class="col-sm-8">
+			<h3>Client properties</h3>
+            <table class="detail-table">
+                <tr>
+                    <th>CommonName</th>
+                    <td>{{ client.commonName}}</td>
+                </tr>
+                <tr>
+                    <th>Owner</th>
+                    <td><a href="user/{{user.id}}"> {{ user.name }} {{ user.lastName}} ({{ user.id }})</a></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        <toggle-switch
+                                ng-model="switchStatus"
+                                on-label="Enabled"
+                                off-label="Disabled">
+                        </toggle-switch>
+                    </td>
+                </tr>
+                <tr>
+                    <th>IP leases</th>
+                    <td><span ng-repeat="lease in client.leases">{{ lease.address }}<br /></span></td>
+                </tr>
+                <tr>
+                    <th>IP subnet leases</th>
+                    <td><span ng-repeat="lease in client.subnetLeases">{{ lease.subnet.subnet }}</span></td>
+                </tr>
+                <tr>
+                    <th>Certificate details</th>
+                    <td ng-if="!noCert">
+                        Serial: {{ (cert.serial || 0) }}<br />
+                        Signed on: {{ ((cert.signedDate | date ) || 'Not signed') }}<br />
+                        Subject: {{ (cert.subject || 'N/A') }}<br />
+                        Issuer: {{ (cert.issuer || 'N/A') }} <br />
+                        Valid between: {{cert.notBefore}} untill {{cert.notAfter}}
+                    </td>
+                    <td ng-if="noCert">
+                        This client has no associated keypair.
+                    </td>
+                </tr>
+			</table>
+			<h3>Last 5 connections</h3>
+			<table class="detail-table">
+                <tr>
+                    <th>Date opened / Date closed</th>
+                    <th>Details</th>
+                </tr>
+                <tr ng-repeat="conn in ( connections | orderBy : undefined : true | limitTo : 5 )">
+                    <th>{{ conn.created | date  : 'short' }} / {{ conn.closed | date : 'short' }}</th>
+                    <td>From {{ conn.untrustedIP }}, OpenVPN {{ conn.version }} on {{ conn.platform }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4 action-list">
+            <h3>Actions</h3>
+            <ul>
+                <li><input type="button" class="btn btn-block" value="Assign new keypair"
+                           ng-click="newKeypair()"/></li>
+                <li><input type="button" class="btn btn-block" value="Download config package"
+                           ng-click="downloadConfig()"/></li>
+                <li><input type="button" class="btn btn-block" value="Modify IP lease assignment"
+                           ng-click="modifyClientLeases()"/></li>
+                <li><input type="button" class="btn btn-danger btn-block" value="Delete"
+                           ng-click="delete()"/></li>
+            </ul>
+        </div>
+    </div>
+</section>

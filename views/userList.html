@@ -1,0 +1,31 @@
+<section ng-controller="UserList">
+    <div class="info col-xs-12"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Click on a row to view associated actions</div><br />
+    <table class="table table-hover action-table">
+        <tr>
+            <th>Email address</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+        <tr class="action-list hidden">
+            <td colspan="10">
+                <h3>Actions</h3>
+                <ul>
+                    <li><a href="client?user={{selected.id}}">View associated clients</a></li>
+                    <li><a href="/user/{{selected.id}}/lease">Modify IP lease assignment</a></li>
+                    <li><a href="/account">Go to billing</a></li>
+                </ul>
+            </td>
+        </tr>
+        <tr ng-repeat="user in users" ng-click="showActions($event, user);">
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.lastName }}</td>
+            <td><input type="checkbox" disabled checked="{{ user.enabled }}"></td>
+            <td><a href="user/{{user.id}}">Modify</a></td>
+        </tr>
+    </table>
+
+    </div>
+</section>

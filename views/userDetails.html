@@ -1,0 +1,77 @@
+<section ng-controller="UserDetails">
+    <div class="row">
+
+        <form ng-if="!changePassword.active" role="form" class="col-md-8">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" readonly
+                       ng-model="user.email">
+            </div>
+            <div class="form-group">
+                <label for="name">name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name" ng-model="user.name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">lastName</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Enter lastName"
+                       ng-model="user.lastName">
+            </div>
+            <div class="form-group">
+                <label for="street">street</label>
+                <input type="text" class="form-control" id="street" placeholder="Enter street" ng-model="user.street">
+            </div>
+            <div class="form-group">
+                <label for="postalCode">postalCode</label>
+                <input type="text" class="form-control" id="postalCode" placeholder="Enter postalCode"
+                       ng-model="user.postalCode">
+            </div>
+            <div class="form-group">
+                <label for="municipality">municipality</label>
+                <input type="text" class="form-control" id="municipality" placeholder="Enter municipality"
+                       ng-model="user.municipality">
+            </div>
+            <div class="form-group">
+                <label for="country">country</label>
+                <input type="text" class="form-control" id="country" placeholder="Enter country"
+                       ng-model="user.country">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">birthDate</label>
+                <input type="text" class="form-control" id="birthDate" placeholder="Enter birthDate"
+                       ng-model="user.birthDate">
+            </div>
+            <div class="form-group">
+                <label for="birthPlace">birthPlace</label>
+                <input type="text" class="form-control" id="birthPlace" placeholder="Enter birthPlace"
+                       ng-model="user.birthPlace">
+            </div>
+            <div class="form-group">
+                <label for="enabled">
+                    Enabled
+                </label>
+                <input type="checkbox" id="enabled" ng-model="user.enabled">
+            </div>
+        </form>
+
+        <form ng-if="changePassword.active" role="form" class="col-md-8">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" ng-model="changePassword.password">
+            </div>
+            <div class="form-group">
+                <label for="password-confirm">Confirm password</label>
+                <input type="password" class="form-control" id="password-confirm" ng-model="changePassword.confirm">
+            </div>
+        </form>
+
+        <div class="col-sm-4 action-list">
+            <h3>Actions</h3>
+            <ul>
+                <li ng-if="!changePassword.active"><button type="submit" class="btn btn-block btn-primary" ng-click="update()">Save changeList</button></li>
+                <li ng-if="!changePassword.active"><input type="button" class="btn btn-block" value="Change password"
+                           ng-click="changePassword.active = true"/></li>
+                <li ng-if="changePassword.active && changePassword.password == changePassword.confirm"><button type="submit" class="btn btn-block btn-primary" ng-click="updatePassword()">Save password</button></li>
+            </ul>
+        </div>
+    </div>
+</section>

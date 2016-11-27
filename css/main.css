@@ -1,0 +1,287 @@
+@import url('//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Montserrat:700|Merriweather:400italic');
+
+body {
+    background-color: #F9F9F9;
+    font-size: 11pt;
+    font-family: "Lato", sans-serif;
+    margin-bottom: 110px;
+}
+
+h3 {
+    font-size: 14pt;
+}
+
+.zero-padding-right {
+    padding-right: 0;
+}
+
+.zero-padding-left {
+    padding-left: 0;
+}
+
+header {
+    box-sizing: border-box;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+header #navbar {
+    width: 100%;
+    float: left;
+    color: #FEFEFE;
+    background-color: #333;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+#navbar #logo {
+    width: 100px;
+}
+
+header #breadcrumb {
+    float: left;
+    width: 100%;
+    background-color: #EEE;
+    padding-left: 0px;
+    border-bottom: solid 1px #888;
+    color: #333;
+    padding-top: 5px;
+    font-size: 9pt;
+}
+
+header #breadcrumb ol {
+    list-style-image: none;
+    list-style-position: inside;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+header #current-user {
+    line-height: 20pt;
+    font-weight: normal;
+    float: right;
+}
+
+header #message {
+    float: left;
+    width: 100%;
+    background-color: #fcf8e3;
+    padding-left: 10px;
+    border-bottom: solid 1px #888;
+    color: #333;
+    padding-top: 10px;
+}
+
+@media (min-width: 768px) {
+    header #breadcrumb {
+        padding-left: 10px;
+        font-size: 12pt;
+    }
+
+    header #breadcrumb ol {
+        padding-left: 30px;
+    }
+}
+
+header #breadcrumb li {
+    font-weight: normal;
+    display: inline;
+}
+
+.container {
+    padding-top: 83px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+form {
+    margin-top: 20px;
+}
+
+.form-group > label {
+    float: left;
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: left;
+    line-height: 24px;
+    border-bottom: solid 1px #DDD;
+    box-sizing: border-box;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    width: 39%;
+}
+
+.form-control[type=text],
+.form-control[type=password],
+.form-control[type=email],
+.form-control[type=file],
+select.form-control {
+    background-image: linear-gradient(#FDFDFD 0%, #FFF 100%);
+    border: none;
+    border-bottom: solid 2px #EEE;
+    width: 60%;
+    border-radius: 0;
+}
+
+input[type=text].ng-valid,
+input[type=password].ng-valid,
+input[type=email].ng-valid {
+    border-bottom: solid 2px green;
+}
+
+button.form-control,
+input[type=button].form-control {
+    border-radius: 0;
+    margin-right: 20px;
+    border-color: #999;
+    border-width: 1px;
+    background-color: #EEE;
+    background-image: none;
+    color: #000;
+}
+
+.btn[type=button],
+.btn[type=submit],
+.btn[type=reset]{
+    border-radius: 0;
+    margin-right: 20px;
+    border-color: #999;
+    border-width: 1px;
+    background-color: #EEE;
+}
+
+/*.btn:hover {
+    background-color: #666;
+    color: #F5F5F5;
+}*/
+
+.tab-content > .active{
+    background-color: #FFF;
+    padding: 20px;
+    border-left: solid 1px #DDD;
+    border-right: solid 1px #DDD;
+    border-bottom: solid 1px #DDD;
+}
+
+.action-list {
+    background-color: #FCFCFC;
+}
+
+div.action-list {
+    border-left: solid 1px #CCC;
+    padding: 10px;
+}
+
+.action-list h3 {
+    font-size: 10pt;
+    text-align: left;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 5px;
+    color: #888;
+}
+
+.action-list ul {
+    padding-left: 0;
+}
+
+.action-list li {
+    list-style-type: none;
+    list-style-position: inside;
+    list-style-image: none;
+    padding: 5px;
+    min-height: 25px;
+}
+
+table.detail-table {
+    width: 100%;
+}
+
+table.detail-table td {
+    padding: 10px;
+    border-bottom: solid 1px #DDD;
+}
+
+table.detail-table th {
+    font-weight: normal;
+    padding: 10px;
+    border-bottom: solid 1px #AAA;
+}
+
+table.detail-table tr:hover {
+    background-color: #ffffff;
+}
+
+.info {
+    padding: 10px;
+    padding-left: 15px;
+}
+
+@media (min-height: 500px) {
+    .info {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}
+
+.info span {
+    margin-right: 15px;
+}
+
+footer {
+	background-color: #FEFEFE;
+    padding: 15px;
+    width: 100%;
+    height: 110px;
+    position: fixed;
+    bottom: 0;
+    color: #555;
+    border-top: solid 1px #888;
+}
+
+footer .neutrinoc {
+    float: right;
+    color: #333;
+    font-size: 10pt;
+}
+
+footer .neutrinoc img {
+    border-radius: 15px;
+}
+
+/**
+Special stylez
+*/
+
+.balance-zero {
+    border: solid 1px orange;
+    color: orange;
+    background-color: #ffffff;
+}
+
+.balance-paid {
+    border: solid 1px green;
+    color: green;
+    background-color: white;
+}
+
+.balance-unpaid {
+    border: solid 1px red;
+    color: darkred;
+    background-color: #ffffff;
+}
+
+.balance-paid::before, .balance-unpaid::before, .balance-zero::before {
+    content: '€';
+}

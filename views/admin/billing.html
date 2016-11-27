@@ -1,0 +1,101 @@
+<section ng-controller="Billing">
+    <div class="row">
+        <h3>Billing</h3>
+        <tabset>
+            <tab heading="Product billing">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <p>Accounts</p>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="account in accounts"
+                                ng-click="accountSelected(account)">
+                                {{ account.id }} : {{ account.description }} <br/> {{ account.ownerInfo.name }} {{
+                                account.ownerInfo.lastName }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4">
+                        <p>Services</p>
+                        <input type="button" value="Add new instance" ng-click="curOp = 'addBSI'"/>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="bsi in bsis">
+                                {{ bsi.bs.sku }} <br/>
+                                {{ bsi.startedAt }} - {{ bsi.stoppedAt || 'Today' }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="things"></div>
+                        <div ng-if="curOp == 'addBSI'">
+                            <p>Select Billing Scheme</p>
+
+                            <div class="form-group">
+                                <select class="form-control" ng-model="selected.billingScheme"
+                                        ng-options="scheme.sku for (id, scheme) in billingSchemes">
+                                </select>
+                            </div>
+                            <label for="startDate">Start Date</label>
+
+                            <p class="input-group">
+                                <input type="text" class="form-control" datepicker-popup ng-model="selected.startDate"
+                                       is-open="opened"
+                                       id="startDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
+                                       ng-required="true" close-text="Close"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                            </p>
+                            <input class="form-control btn-primary" type="button"
+                                   ng-click="createBillingInstance(selected.billingScheme)" value="Add"/>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Transactions">
+                <div class="row">
+                    <table class="table table-hover action-table">
+                        <tr>
+                            <th>Description</th>
+                            <th>Owner</th>
+                            <th>Date</th>
+                            <th>State</th>
+                            <th></th>
+                        </tr>
+                        <tr class="action-list hidden">
+                            <td colspan="10">
+                                <h3>Actions</h3>
+                                <ul>
+                                    <li><a href="account/{{selected.id}}">View transactions</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="tsx in transactions" ng-click="showActions($event, client);">
+                            <td>{{ tsx.description }}</td>
+                            <td><a href="/user/{{ account.user.id }}">{{ tsx.user.name }} {{ tsx.user.lastName }}</a></td>
+                            <td>{{ tsx.date }}</td>
+                            <td>{{ tsx.state }}</td>
+                            <td><a href="">Modify</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+            <tab heading="Import">
+                <div class="row">
+                    <p>Upload latest RecordBank statement</p>
+
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="file">CSV Export</label>
+                            <input class="form-control" textfile="import.csv" type="file" id="file"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control btn-default" ng-click="importBankStatement()" type="button" value="Import"/>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</section>

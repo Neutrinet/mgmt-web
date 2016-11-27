@@ -1,0 +1,37 @@
+<section ng-controller="DNSRecordDetails">
+    <div class="row">
+        <form role="form" class="col-md-8">
+            <div class="form-group">
+                <label for="type">Record type</label>
+                <select class="form-control" id="type " ng-model="record.type">
+                    <option>PTR</option>
+                </select>
+            </div>
+            <div class="form-group" ng-if="record.type == 'PTR'">
+                <label for="ip">IP address</label>
+                <input type="text" class="form-control" id="ip" placeholder="Enter IP address" readonly
+                       ng-model="record.name">
+            </div>
+            <div class="form-group" ng-if="record.type == 'PTR'">
+                <label for="name">Reverse Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter DNS name" readonly
+                       ng-model="record.target">
+            </div>
+            <div class="form-group" ng-if="record.type == 'PTR'">
+                <label for="ttl">Time To Live (in seconds)</label>
+                <input type="text" class="form-control" id="ttl" placeholder="3600" readonly
+                       ng-model="record.ttl">
+            </div>
+
+        </form>
+        <div class="col-sm-4 action-list">
+            <h3>Actions</h3>
+            <ul>
+                <li><input type="button" class="btn btn-default btn-block" value="Save"
+                           ng-click="save()"/></li>
+                <li><input type="button" class="btn btn-danger btn-block" value="Delete"
+                           ng-click="delete()"/></li>
+            </ul>
+        </div>
+    </div>
+</section>

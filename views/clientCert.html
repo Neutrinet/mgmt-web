@@ -1,0 +1,65 @@
+<section ng-controller="ClientCert">
+    <div class="row">
+        <div class="col-sm-8" ng-if="!noCert">
+            <h3>Current certificate details</h3>
+
+            <p>
+                Serial: {{ (cert.serial || 0) }}<br/>
+                Signed on: {{ ((cert.signedDate | date ) || 'Not signed') }}<br/>
+                Subject: {{ (cert.subject || 'N/A') }}<br/>
+                Issuer: {{ (cert.issuer || 'N/A') }} <br/>
+                Valid between: {{cert.notBefore}} untill {{cert.notAfter}}
+            </p>
+        </div>
+        <div class="col-sm-8" ng-if="noCert">
+            <h3>No certificates associated</h3>
+            <p>This client has no certificates. Rekey to add one.</p>
+        </div>
+        <div class="col-sm-4 action-list">
+            <h3>Actions</h3>
+            <ul>
+                <li><input type="button" class="btn btn-block" value="Rekey"
+                           ng-click="rekeyVisible = true"/></li>
+                <li><input type="button" class="btn btn-block" value="View client details"
+                           ng-click="viewClient()"/></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" ng-if="rekeyVisible == true">
+        <div class="col-md-8">
+            <h3>
+                Rekey using certificate
+            </h3>
+
+            <p>Please paste your CSR (Base64-armored PKCS10) file below</p>
+
+            <form role="form">
+                <div class="form-group">
+                    <label for="csr">Certificate Signing Request</label>
+                    <textarea id="csr" ng-model="csr.text" class="form-control" placeholder="Paste CSR here"></textarea>
+                </div>
+                <input type="checkbox" ng-model="csr.extendedValidity" class="form-control" />Sign CSR with extended validity (5 years)<br />
+                <div ng-if="csr.extendedValidity"><b>Warning:</b> Enabling this option implies your key needs to be safely stored for 5 years.
+                    Should your key be compromised, rekey immediately using this page.</div>
+                <input type="button" ng-click="rekey()" height="300" value="Rekey" class="btn btn-primary"/>
+            </form>
+
+            <p>Generating a CSR</p>
+            <code>
+                # Windows users may need to <a href="https://www.openssl.org/related/binaries.html" title="OpenSSL binaries">download</a>
+                OpenSSL first.<br/>
+                # enter the following commands in a terminal or command prompt
+                # navigate to directory in which you want your keys<br />
+                # remember, this should be a private directory<br />
+                # preferably in your home folder and not shared via Dropbox etc.<br />
+                cd [directory that will hold your keys] <br /><br />
+                # generate your keypair and the certificate signing request <br />
+                # take care to certainly include a Common Name (CN) in your request, other fields are <br/>
+                # optional yet useful <br/>
+                openssl req -out CSR.csr -new -newkey rsa:4096 -nodes -keyout client.key <br/>
+                <br />
+                cat CSR.csr # copy/paste the contents above
+            </code>
+        </div>
+    </div>
+</section>

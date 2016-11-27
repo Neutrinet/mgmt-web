@@ -1,0 +1,34 @@
+<section ng-controller="Overview">
+    <div class="row">
+        <h3>Your personal overview</h3>
+        <div id="todo">
+            <ul>
+                <li ng-if="keypairIsSetup == false">Your client(s) do not have a valid keypair assigned and there is no eID coupled. <br />
+                You will not be able to connect without a valid keypair configured, go to your <a href="/client">client overview</a> to fix this.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4><a href="/client">Clients</a></h4>
+            <table class="detail-table" style="background-color: #FEFEFE;">
+                <tr>
+                    <th>Common Name</th>
+                    <th>Last connection time</th>
+                </tr>
+                <tr ng-repeat="client in clients" ng-click="goToClient(client.id)" style="cursor:  pointer;">
+                    <td>{{ client.commonName }}</td>
+                    <td>{{ ( client.connections | orderBy : undefined : true | limitTo : 1 )[0].created | date : 'short' }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4><a href="/account">Billing status</a></h4>
+            <div ng-class="balanceStyle" style="padding: 10px; font-size: 20pt;">
+                {{ balance.accountBalance || "0" }}
+            </div>
+            <p style="font-size: 8pt;">Billing info is in beta</p>
+        </div>
+    </div>
+</section>
